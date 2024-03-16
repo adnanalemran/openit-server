@@ -17,14 +17,14 @@ router.get("/admin/:email", async (req, res) => {
   res.send({ admin });
 });
 //ok
-router.get("/agent/:email", async (req, res) => {
+router.get("/student/:email", async (req, res) => {
   const email = req.params.email;
   const user = await userCollection.findOne({ email: email });
-  let agent = false;
+  let student = false;
   if (user) {
-    agent = user?.userType === "isAgent";
+    student = user?.userType === "isStudent";
   }
-  res.send({ agent });
+  res.send({ student: student });
 });
 //ok
 
@@ -96,7 +96,9 @@ router.patch("/:id", async (req, res) => {
 // Route to get the total number of agents
 router.get("/totalAgents", async (req, res) => {
   try {
-    const totalAgents = await userCollection.countDocuments({ userType: "isAgent" });
+    const totalAgents = await userCollection.countDocuments({
+      userType: "isAgent",
+    });
     res.json({ totalAgents });
   } catch (error) {
     console.error("Error counting agents:", error);
@@ -106,13 +108,17 @@ router.get("/totalAgents", async (req, res) => {
 
 // Route to get the total number of admins
 router.get("/totalAdmins", async (req, res) => {
-  console.log('hit admin')
+  console.log("hit admin");
   try {
-    const totalAdmins = await userCollection.countDocuments({ userType: "isAdmin" });
+    const totalAdmins = await userCollection.countDocuments({
+      userType: "isAdmin",
+    });
     res.json({ totalAdmins });
   } catch (error) {
     console.error("Error counting admins:", error);
-    res.status(500).json({ error: "Internal Server Error", details: error.message });
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", details: error.message });
   }
 });
 
@@ -151,20 +157,5 @@ router.put("/:id", async (req, res) => {
     });
   }
 });
- 
-
-router.post('/paid', async(req, res)=>{
-  const id = req.query.userId;
-  const amount = req.query.amount;
-  console.log(id, amount)
-  const user = await userCollection.findOne({ _id: new ObjectId(id) });
-
-  const update = await userCollection.updateOne(
-    { _id: new ObjectId(id) },
-    { $set: { totalDueAmmout: user.totalDueAmmout - amount } }
-  );
-  console.log(update);
-  res.send(update);
-})
 
 module.exports = router;
