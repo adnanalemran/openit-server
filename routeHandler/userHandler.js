@@ -108,7 +108,7 @@ router.get("/totalAgents", async (req, res) => {
 
 // Route to get the total number of admins
 router.get("/totalAdmins", async (req, res) => {
-  console.log("hit admin");
+ 
   try {
     const totalAdmins = await userCollection.countDocuments({
       userType: "isAdmin",
