@@ -24,8 +24,8 @@ router.get("/userNumber", async (req, res) => {
       const totalStudents = await userCollection.countDocuments({ userType: "isStudent" });
       const totalAdmins = await userCollection.countDocuments({ userType: "isAdmin" });
       const totalUser = await userCollection.countDocuments({ });
-
-      res.json({totalAdmins:totalAdmins ,totalStudents: totalStudents, totalUser:totalUser});
+    const outService = totalUser-(totalStudents+totalAdmins)  ;
+      res.json({totalAdmins:totalAdmins ,totalStudents: totalStudents, totalUser:totalUser,outService:outService});
     } catch (error) {
       console.error("Error counting admins:", error);
       res.status(500).json({ error: "Internal Server Error", details: error.message });
