@@ -32,4 +32,17 @@ router.get("/userNumber", async (req, res) => {
     }
   });
 
+
+
+
+  router.get("/studentAllData", async (req, res) => {
+    try {
+      const students = await userCollection.find({ userType: "isStudent" });
+      res.json(students);
+    } catch (error) {
+      console.error("Error fetching student data:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  });
+  
 module.exports = router;
