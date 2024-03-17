@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const userCollection = require("../schemas/userSchemas");
-const { ObjectId } = require("mongodb");
-const { default: axios } = require("axios");
+ 
+ 
 require("dotenv").config();
 
 //ok
@@ -62,6 +62,9 @@ router.get("/email/:email", async (req, res) => {
   }
 });
 
+
+
+
 //ok
 router.get("/", async (req, res) => {
   const users = await userCollection.find();
@@ -80,6 +83,9 @@ router.delete("/:id", async (req, res) => {
   const result = await userCollection.deleteOne({ _id: id });
   res.send(result);
 });
+
+
+
 
 //ok
 router.patch("/:id", async (req, res) => {
@@ -108,19 +114,15 @@ router.get("/totalAgents", async (req, res) => {
 
 // Route to get the total number of admins
 router.get("/totalAdmins", async (req, res) => {
- 
   try {
-    const totalAdmins = await userCollection.countDocuments({
-      userType: "isAdmin",
-    });
+    const totalAdmins = await userCollection.countDocuments({ userType: "isAdmin" });
     res.json({ totalAdmins });
   } catch (error) {
     console.error("Error counting admins:", error);
-    res
-      .status(500)
-      .json({ error: "Internal Server Error", details: error.message });
+    res.status(500).json({ error: "Internal Server Error", details: error.message });
   }
 });
+
 
 // Route to get the total number of users
 router.get("/totalUsers", async (req, res) => {
@@ -132,6 +134,9 @@ router.get("/totalUsers", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+
+
 
 router.put("/:id", async (req, res) => {
   try {

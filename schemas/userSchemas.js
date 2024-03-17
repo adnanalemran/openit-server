@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({
       const date = new Date();
       const timezoneOffset = date.getTimezoneOffset();
 
-      // Adjusting for Bangladesh timezone (UTC+6)
+    
       date.setMinutes(date.getMinutes() + 360);
 
       return date;

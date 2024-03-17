@@ -7,6 +7,7 @@ const port = process.env.PORT || 5000;
 require("dotenv").config();
 
 const userHandler = require("../routeHandler/userHandler");
+const userRouter = require("../routeHandler/userRouter");
 
 app.use(cors());
 app.use(express.json());
@@ -28,6 +29,8 @@ db.once("open", () => {
 //start user function
 
 app.use("/user", userHandler);
+
+app.use("/userv2", userRouter);
 
 // --------------------------------------localApi-------------------------------------------
 
