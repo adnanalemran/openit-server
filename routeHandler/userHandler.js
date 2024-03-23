@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const userCollection = require("../schemas/userSchemas");
- 
- 
+
 require("dotenv").config();
 
 //ok
@@ -62,9 +61,6 @@ router.get("/email/:email", async (req, res) => {
   }
 });
 
-
-
-
 //ok
 router.get("/", async (req, res) => {
   const users = await userCollection.find();
@@ -84,9 +80,6 @@ router.delete("/:id", async (req, res) => {
   res.send(result);
 });
 
-
-
-
 //ok
 router.patch("/:id", async (req, res) => {
   const id = req.params.id;
@@ -98,14 +91,6 @@ router.patch("/:id", async (req, res) => {
 
   res.send(result);
 });
-
- 
- 
-
-
- 
-
-
 
 router.put("/:id", async (req, res) => {
   try {

@@ -8,6 +8,7 @@ require("dotenv").config();
 
 const userHandler = require("../routeHandler/userHandler");
 const userRouter = require("../routeHandler/userRouter");
+const noticeRouter = require("../routeHandler/noticeHandler");
 
 app.use(cors());
 app.use(express.json());
@@ -31,6 +32,14 @@ db.once("open", () => {
 app.use("/user", userHandler);
 
 app.use("/userv2", userRouter);
+
+
+app.use("/notice", noticeRouter);
+
+
+
+
+
 
 // --------------------------------------localApi-------------------------------------------
 
