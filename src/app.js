@@ -9,6 +9,7 @@ require("dotenv").config();
 const userHandler = require("../routeHandler/userHandler");
 const userRouter = require("../routeHandler/userRouter");
 const noticeRouter = require("../routeHandler/noticeHandler");
+const blogRouter = require("../routeHandler/blogHandler");
 
 app.use(cors());
 app.use(express.json());
@@ -35,6 +36,7 @@ app.use("/userv2", userRouter);
 
 
 app.use("/notice", noticeRouter);
+app.use("/blog", blogRouter);
 
 
 

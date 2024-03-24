@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const noticeCollection = require("../schemas/noticeSchemas");
+const blogCollection = require("../schemas/blogSchemas");
 require("dotenv").config();
 
 //ok
 router.get("/", async (req, res) => {
     try {
-        const notices = await noticeCollection
+        const notices = await blogCollection
           .find()
           .sort({ noticeDate: -1 })
            
@@ -21,19 +21,19 @@ router.get("/", async (req, res) => {
 //ok
 router.post("/", async (req, res) => {
   const notice = req.body;
-  const create = await noticeCollection.create(notice);
+  const create = await blogCollection.create(notice);
   res.send(create);
 });
 //ok
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
-  const result = await noticeCollection.deleteOne({ _id: id });
+  const result = await blogCollection.deleteOne({ _id: id });
   res.send(result);
 });
 
 router.get("/latest", async (req, res) => {
   try {
-    const notices = await noticeCollection
+    const notices = await blogCollection
       .find()
       .sort({ noticeDate: -1 })
       .limit(5);
@@ -48,7 +48,7 @@ router.get("/latest", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     try {
-      const result = await noticeCollection.findOne({
+      const result = await blogCollection.findOne({
         _id: req.params.id,
       });
   
