@@ -9,7 +9,7 @@ require("dotenv").config();
 router.get("/", async (req, res) => {
   //   const users = await userCollection.find();
   //   res.send(users);
- 
+
   res.send("hello user route ");
 });
 
@@ -20,6 +20,9 @@ router.get("/userNumber", async (req, res) => {
     });
     const totalAdmins = await userCollection.countDocuments({
       userType: "isAdmin",
+    });   
+     const applied_student = await userCollection.countDocuments({
+      userType: "applied_student",
     });
 
     const totalUser = await userCollection.countDocuments({});
@@ -33,6 +36,7 @@ router.get("/userNumber", async (req, res) => {
       totalUser: totalUser,
       outService: outService,
       totalNotice: totalNotice,
+      applied_student: applied_student,
       blog: totalNotice,
     });
   } catch (error) {
@@ -51,6 +55,30 @@ router.get("/studentAllData", async (req, res) => {
     console.error("Error fetching student data:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
+});
+router.get("/appliedStudent", async (req, res) => {
+  try {
+    const students = await userCollection.find({ userType: "applied_student" });
+    res.json(students);
+  } catch (error) {
+    console.error("Error fetching student data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+//ok
+router.patch("/:id", async (req, res) => {
+  const id = req.params.id;
+  const userType = req.body.role;
+  const beach = req.body.beach;
+
+  const filter = { _id: id };
+
+  const update = { $set: { userType, beach } };
+
+  const result = await userCollection.updateOne(filter, update);
+
+  res.send(result);
 });
 
 module.exports = router;
