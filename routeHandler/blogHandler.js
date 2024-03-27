@@ -25,6 +25,8 @@ router.post("/", async (req, res) => {
   res.send(create);
 });
 //ok
+
+
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
   const result = await blogCollection.deleteOne({ _id: id });
@@ -34,9 +36,9 @@ router.delete("/:id", async (req, res) => {
 router.get("/latest", async (req, res) => {
   try {
     const notices = await blogCollection
-      .find()
-      .sort({ noticeDate: -1 })
-      .limit(5);
+    .find()
+    .sort({ postDate: -1 }) 
+    .limit(3);
     res.send(notices);
   } catch (error) {
     console.error("Error fetching latest notices:", error);

@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const userCollection = require("../schemas/userSchemas");
 const noticeCollection = require("../schemas/noticeSchemas");
+const blogCollection = require("../schemas/blogSchemas");
 require("dotenv").config();
 
 router.get("/", async (req, res) => {
@@ -23,6 +24,7 @@ router.get("/userNumber", async (req, res) => {
 
     const totalUser = await userCollection.countDocuments({});
     const totalNotice = await noticeCollection.countDocuments({});
+    const totalBlog = await blogCollection.countDocuments({});
 
     const outService = totalUser - (totalStudents + totalAdmins);
     res.json({
@@ -31,6 +33,7 @@ router.get("/userNumber", async (req, res) => {
       totalUser: totalUser,
       outService: outService,
       totalNotice: totalNotice,
+      blog: totalNotice,
     });
   } catch (error) {
     console.error("Error counting admins:", error);
