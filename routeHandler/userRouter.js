@@ -9,7 +9,7 @@ require("dotenv").config();
 router.get("/", async (req, res) => {
   //   const users = await userCollection.find();
   //   res.send(users);
-  console.log("hello user route ");
+ 
   res.send("hello user route ");
 });
 
