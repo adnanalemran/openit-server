@@ -9,7 +9,7 @@ require("dotenv").config();
 router.get("/admin/:email", async (req, res) => {
   const email = req.params.email;
   const user = await userCollection.findOne({ email: email });
-  console.log(user)
+  console.log(user);
   let admin = false;
   if (user) {
     admin = user?.userType === "isAdmin";
