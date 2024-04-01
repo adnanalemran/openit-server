@@ -34,14 +34,8 @@ app.use("/user", userHandler);
 
 app.use("/userv2", userRouter);
 
-
 app.use("/notice", noticeRouter);
 app.use("/blog", blogRouter);
-
-
-
-
-
 
 // --------------------------------------localApi-------------------------------------------
 
