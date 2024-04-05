@@ -16,8 +16,8 @@ app.use(express.json());
 
 const uri = `mongodb+srv://adnan:adnan@cluster0.db2nedm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
-// -mongoose.connect(uri, { dbName: "open-it" });
--mongoose.connect(uri, { dbName: "open-it-main" });
+-mongoose.connect(uri, { dbName: "open-it" });
+// -mongoose.connect(uri, { dbName: "open-it-main" });
 
 const db = mongoose.connection;
 
