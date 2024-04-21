@@ -37,7 +37,7 @@ router.get("/userNumber", async (req, res) => {
       outService: outService,
       totalNotice: totalNotice,
       applied_student: applied_student,
-      blog: totalNotice,
+      blog: totalBlog,
     });
   } catch (error) {
     console.error("Error counting admins:", error);
